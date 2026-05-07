@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, useColorScheme } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
 import { Home, PlusSquare, Settings } from "lucide-react-native";
 
 const _layout = () => {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === "dark";
   return (
       <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: "black"
+          backgroundColor: isDark ? "#000" : "#fff",
         },
         tabBarActiveTintColor: "#fff",
         tabBarInactiveTintColor: "rgba(255,255,255,0.5)",
