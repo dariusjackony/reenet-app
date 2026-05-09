@@ -2,6 +2,7 @@ import {Pressable, StyleSheet, Text, TextInput, View, useColorScheme, Image, Fla
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 import React from 'react'
+import ActionButton from '../components/ActionButton';
 
 const posts = () => {
   const colorScheme = useColorScheme();
@@ -68,6 +69,9 @@ const posts = () => {
             <Text className='text-white ml-12 mb-2'>
               {item.content}
             </Text>
+            <View>
+              
+            </View>
         </View>
       )}
     />
