@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ActionButton = ({icon, label, onPress, active}) => {
+const ActionButton = () => {
   return (
-    <Pressable onPress={onPress}>
-       <Text className={active ? "text-blue-400": "text-zinc-400"}>
-         {icon} {label}
-       </Text>
-    </Pressable>
+    <View>
+      <Text>ActionButton</Text>
+    </View>
   )
 }
 
-export default ActionButton;
+export default ActionButton
+
+const styles = StyleSheet.create({})
