@@ -2,6 +2,7 @@
   "expo": {
     "name": "signal-app",
     "slug": "signal-app",
+    "API_URL": "https://reenet.onrender.com/signals/",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

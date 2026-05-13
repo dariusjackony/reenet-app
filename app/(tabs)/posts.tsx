@@ -8,7 +8,7 @@ import {
   Image,
   FlatList
 } from 'react-native';
-
+import Constants from "expo-constants";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from 'react';
@@ -20,10 +20,21 @@ import {
   Share2
 } from "lucide-react-native";
 import axios from "axios";
-import { API_URL } from "@env";
 
-const [postText, setPostText] = useState("")
-const [loading, setLoading] = useState(false)
+type Post = {
+  id: number;
+  username: string;
+  content: string;
+  likes: number;
+  liked: boolean;
+}
+
+const Posts = () => {
+  const API_URL = Constants.expoConfig?.extra?.API_URL;
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === "dark";
+  const [postText, setPostText] = useState("")
+  const [loading, setLoading] = useState(false)
 
 
 const handleSPost = async () => {
@@ -41,10 +52,7 @@ const handleSPost = async () => {
     setLoading(false)
   }
 }
-const Posts = () => {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const [posts, setPosts] = useState([
+  const [posts, setPosts] = useState<Post[]>([
     {
       id: 1,
       username: "Darius",
@@ -68,7 +76,7 @@ const Posts = () => {
     },
   ]);
 
-  const toggleLike = (id) => {
+  const toggleLike = (id: number) => {
     setPosts(
       posts.map((post) =>
         post.id === id
@@ -84,7 +92,7 @@ const Posts = () => {
     );
   };
 
-  const renderPost = ({ item }) => (
+  const renderPost = ({ item }: {item: Post}) => (
     <View className="p-4 border-b border-zinc-800">
 
       <View className="flex-row items-center mb-3">
