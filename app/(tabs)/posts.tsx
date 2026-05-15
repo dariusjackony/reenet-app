@@ -12,7 +12,8 @@ import Constants from "expo-constants";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from 'react';
-
+import {Plus} from  "lucide-react-native";
+import { useRouter } from 'expo-router';
 import {
   Heart,
   MessageCircle,
@@ -20,6 +21,7 @@ import {
   Share2
 } from "lucide-react-native";
 import axios from "axios";
+import { Alert } from "react-native";
 
 type Post = {
   id: number;
@@ -29,23 +31,24 @@ type Post = {
   liked: boolean;
 }
 
+
 const Posts = () => {
   const API_URL = Constants.expoConfig?.extra?.API_URL;
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const [postText, setPostText] = useState("")
   const [loading, setLoading] = useState(false)
-
+  const router = useRouter();
 
 const handleSPost = async () => {
   if(!postText.trim()) return;
-  console.log("API URL:", API_URL)
   try {
     setLoading(true)
     const response = await axios.post(API_URL, {
       signal_text: postText
     });
     console.log("Posted", response.data)
+    Alert.alert("Success", "Posted Successfully")
     setPostText("")
   } catch (error){
     console.log("Error posting", error)
@@ -186,7 +189,12 @@ const handleSPost = async () => {
         renderItem={renderPost}
         keyExtractor={(item) => item.id.toString()}
       />
-
+      <Pressable
+      onPress={()=> router.push("/createPost")}
+      className="absolute bottom-6 right-6 bg-white w-14 h-14 items-center justify-center rounded-full"
+      >
+        <Plus size={28} color="black" />
+      </Pressable>
     </SafeAreaView>
   );
 };
