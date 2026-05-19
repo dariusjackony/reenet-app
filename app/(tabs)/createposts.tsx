@@ -10,7 +10,7 @@ import { X } from "lucide-react-native";
 import { useRouter } from 'expo-router';
 import { ActivityIndicator } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-const createPosts = () => {
+const createposts = () => {
   const [postText, setPostText] = useState("")
   const [loading, setLoading] = useState(false)
   const [value, setValue] = useState(null)
@@ -117,7 +117,7 @@ const createPosts = () => {
                 onChangeText={setPostText}
                 placeholder="What's on your mind?"
                 placeholderTextColor="#888"
-                className='text-white p-5 rounded-xl border border-zinc-900'
+                className='text-white p-5 rounded-xl '
               />
             </View>
     </View>
@@ -126,5 +126,5 @@ const createPosts = () => {
   )
 }
 
-export default createPosts
+export default createposts
 

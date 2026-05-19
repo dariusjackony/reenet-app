@@ -35,6 +35,7 @@ const Posts = () => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const router = useRouter();
+  const [data, setData] = useState([])
   const [posts, setPosts] = useState<Post[]>([
     {
       id: 1,
@@ -152,7 +153,7 @@ const Posts = () => {
         keyExtractor={(item) => item.id.toString()}
       />
       <Pressable
-      onPress={()=> router.push("/createPosts")}
+      onPress={()=> router.push("/createposts")}
       className="absolute bottom-6 right-6 bg-white w-14 h-14 items-center justify-center rounded-full"
       >
         <Plus size={28} color="black" />

@@ -28,7 +28,7 @@ const _layout = () => {
       />
 
       <Tabs.Screen
-        name="createPosts"
+        name="createposts"
         options={{
           title: "Create",
           tabBarIcon: ({ color, size }) => (
