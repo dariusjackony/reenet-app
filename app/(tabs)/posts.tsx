@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Plus} from  "lucide-react-native";
 import { useRouter } from 'expo-router';
 import {
@@ -19,13 +19,12 @@ import {
   Bookmark,
   Share2
 } from "lucide-react-native";
-
-
+import axios from 'axios';
+import Constants from "expo-constants";
 
 type Post = {
   id: number;
-  username: string;
-  content: string;
+  signal_text: string;
   likes: number;
   liked: boolean;
 }
@@ -35,47 +34,59 @@ const Posts = () => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const router = useRouter();
-  const [data, setData] = useState([])
-  const [posts, setPosts] = useState<Post[]>([
-    {
-      id: 1,
-      username: "Darius",
-      content: "Learning React Native is fun",
-      liked: false,
-      likes: 12,
-    },
-    {
-      id: 2,
-      username: "Isaac",
-      content: "My girlfriend is comming to visit me.",
-      liked: false,
-      likes: 8,
-    },
-    {
-      id: 3,
-      username: "Woori Timothy Otala",
-      content: "Revising mathematics today with my bold head...",
-      liked: false,
-      likes: 24,
-    },
-  ]);
+  const [data, setData] = useState<Post[]>([]);
+  // const [posts, setPosts] = useState<Post[]>([
+  //   {
+  //     id: 1,
+  //     username: "Darius",
+  //     content: "Learning React Native is fun",
+  //     liked: false,
+  //     likes: 12,
+  //   },
+  //   {
+  //     id: 2,
+  //     username: "Isaac",
+  //     content: "My girlfriend is comming to visit me.",
+  //     liked: false,
+  //     likes: 8,
+  //   },
+  //   {
+  //     id: 3,
+  //     username: "Woori Timothy Otala",
+  //     content: "Revising mathematics today with my bold head...",
+  //     liked: false,
+  //     likes: 24,
+  //   },
+  // ]);
   
-  const toggleLike = (id: number) => {
-    setPosts(
-      posts.map((post) =>
-        post.id === id
-          ? {
-              ...post,
-              liked: !post.liked,
-              likes: post.liked
-                ? post.likes - 1
-                : post.likes + 1,
-            }
-          : post
-      )
-    );
-  };
-
+  // const toggleLike = (id: number) => {
+  //   setData(
+  //     data.map((post) =>
+  //       post.id === id
+  //         ? {
+  //             ...post,
+  //             liked: !post.liked,
+  //             likes: post.liked
+  //               ? post.likes - 1
+  //               : post.likes + 1,
+  //           }
+  //         : post
+  //     )
+  //   );
+  // };
+  const API_URL = Constants.expoConfig?.extra?.API_URL;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        setData(response.data);
+        console.log("API RESPONSE:", response.data);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    }
+    fetchData();
+  },[API_URL])
   const renderPost = ({ item }: {item: Post}) => (
     <View className="p-4 border-b border-zinc-800">
 
@@ -86,24 +97,24 @@ const Posts = () => {
         />
 
         <Text className="text-white text-lg font-bold">
-          {item.username}
+          Darius
         </Text>
       </View>
 
       <Text className="text-white text-base mb-4 ml-10">
-        {item.content}
+        {item.signal_text}
       </Text>
 
       <View className="flex-row justify-around">
 
         <Pressable
-          onPress={() => toggleLike(item.id)}
+          onPress={() => console.log('Liked')}
           className="flex-row items-center gap-2"
         >
           <Heart
             size={20}
-            color={item.liked ? "#ef4444" : "#9ca3af"}
-            fill={item.liked ? "#ef4444" : "none"}
+            color= "#9ca3af"
+            fill= "none"
           />
 
           <Text className="text-zinc-400">
@@ -148,7 +159,7 @@ const Posts = () => {
 
 
       <FlatList
-        data={posts}
+        data={data}
         renderItem={renderPost}
         keyExtractor={(item) => item.id.toString()}
       />
