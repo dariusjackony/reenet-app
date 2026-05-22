@@ -3,8 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import React from 'react'
 import { StatusBar } from "expo-status-bar";
 import { Ionicons, FontAwesome, AntDesign  } from "@expo/vector-icons";
+import { useRouter } from 'expo-router';
+
 
 const signup = () => {
+   const router = useRouter()
   return (
     <SafeAreaView className='flex-1 bg-black'>
       <StatusBar style='light' />
@@ -18,12 +21,12 @@ const signup = () => {
       </Text>
 
       <View className="flex-row items-center bg-[#111] rounded-xl px-3 mb-3">
-      <Ionicons name="person-outline" size={20} color="#888" />
-      <TextInput
-         placeholder="Username"
-         placeholderTextColor="#888"
-         className="flex-1 text-white p-4"
-      />
+         <Ionicons name="person-outline" size={20} color="#888" />
+         <TextInput
+            placeholder="Username"
+            placeholderTextColor="#888"
+            className="flex-1 text-white p-4"
+         />
       </View>
 
       <View className='flex-row items-center bg-[#111] rounded-xl px-3 mb-3'>
@@ -74,7 +77,11 @@ const signup = () => {
         onPress={() => navigation.navigate("Login")}
       >
         <Text className="text-gray-400 text-center">
-          Already have an account? Login
+          Already have an account? {" "}
+          <Text
+          className='font-bold text-white'
+          onPress={() => router.push("/auth/login")}
+          >Login</Text>
         </Text>
       </TouchableOpacity>
 

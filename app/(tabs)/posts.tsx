@@ -35,45 +35,6 @@ const Posts = () => {
   const isDark = colorScheme === "dark";
   const router = useRouter();
   const [data, setData] = useState<Post[]>([]);
-  // const [posts, setPosts] = useState<Post[]>([
-  //   {
-  //     id: 1,
-  //     username: "Darius",
-  //     content: "Learning React Native is fun",
-  //     liked: false,
-  //     likes: 12,
-  //   },
-  //   {
-  //     id: 2,
-  //     username: "Isaac",
-  //     content: "My girlfriend is comming to visit me.",
-  //     liked: false,
-  //     likes: 8,
-  //   },
-  //   {
-  //     id: 3,
-  //     username: "Woori Timothy Otala",
-  //     content: "Revising mathematics today with my bold head...",
-  //     liked: false,
-  //     likes: 24,
-  //   },
-  // ]);
-  
-  // const toggleLike = (id: number) => {
-  //   setData(
-  //     data.map((post) =>
-  //       post.id === id
-  //         ? {
-  //             ...post,
-  //             liked: !post.liked,
-  //             likes: post.liked
-  //               ? post.likes - 1
-  //               : post.likes + 1,
-  //           }
-  //         : post
-  //     )
-  //   );
-  // };
   const API_URL = Constants.expoConfig?.extra?.API_URL;
   useEffect(() => {
     const fetchData = async () => {
@@ -95,18 +56,14 @@ const Posts = () => {
           source={require("../../assets/images/pfp.jpeg")}
           className="w-10 h-10 rounded-full mr-3"
         />
-
         <Text className="text-white text-lg font-bold">
           Darius
         </Text>
       </View>
-
       <Text className="text-white text-base mb-4 ml-10">
         {item.signal_text}
       </Text>
-
       <View className="flex-row justify-around">
-
         <Pressable
           onPress={() => console.log('Liked')}
           className="flex-row items-center gap-2"
@@ -116,48 +73,37 @@ const Posts = () => {
             color= "#9ca3af"
             fill= "none"
           />
-
           <Text className="text-zinc-400">
             {item.likes}
           </Text>
         </Pressable>
-
         <Pressable className="flex-row items-center gap-2">
           <MessageCircle size={20} color="#9ca3af" />
-
           <Text className="text-zinc-400">
             3
           </Text>
         </Pressable>
-
         <Pressable>
           <Bookmark size={20} color="#9ca3af" />
         </Pressable>
-
         <Pressable>
           <Share2 size={20} color="#9ca3af" />
         </Pressable>
-
       </View>
     </View>
   );
-
   return (
     <SafeAreaView className="flex-1 bg-black">
       <StatusBar style="light" />
-
       <View className="h-16 border-b border-zinc-800 flex-row items-center justify-between px-5">
         <Text className="text-white text-2xl font-bold">
           REENET
         </Text>
-
         <Image
           source={require("../../assets/images/pfp.jpeg")}
           className='w-10 h-10 rounded-full'
         />
       </View>
-
-
       <FlatList
         data={data}
         renderItem={renderPost}
