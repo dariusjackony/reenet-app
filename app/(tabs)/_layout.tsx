@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, useColorScheme } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
-import { Home, PlusSquare, Settings } from "lucide-react-native";
+import { Home, PlusSquare, Settings, User } from "lucide-react-native";
 
 const _layout = () => {
   const colorScheme = useColorScheme();
@@ -45,6 +45,15 @@ const _layout = () => {
           <Settings color={color} size={size} />
         ),
       }}
+      />
+      <Tabs.Screen 
+       name='profile'
+       options={{
+        title: "Profile",
+        tabBarIcon: ({color, size}) => (
+          <User color={color} size={size} />
+        )
+       }}
       />
     </Tabs>
   )
