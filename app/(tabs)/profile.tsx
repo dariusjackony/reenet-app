@@ -7,6 +7,9 @@ const profile = () => {
   return (
     <SafeAreaView className='flex-1 bg-black'>
       <StatusBar style='light' />
+      <View className='px-4 mt-3'>
+        <Ionicons name='chevron-back' size={25} color="white"/>
+      </View>
       <View className="px-4 mt-10">
         <View className="flex-row items-center justify-between">
           <Image
@@ -53,7 +56,10 @@ const profile = () => {
             <Ionicons name='settings-outline' size={20} color="white"/>
           </TouchableOpacity>
         </View>
-
+      </View>
+      <View className="h-px bg-zinc-700 mt-4" />
+      <View className='mt-10'>
+        <Text className='text-white text-base text-center'>Posts...</Text>
       </View>
     </SafeAreaView>
   )
