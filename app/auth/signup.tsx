@@ -4,6 +4,7 @@ import React from 'react'
 import { StatusBar } from "expo-status-bar";
 import { Ionicons, FontAwesome, AntDesign  } from "@expo/vector-icons";
 import { useRouter } from 'expo-router';
+import Config from 'react-native-config';
 
 
 const signup = () => {

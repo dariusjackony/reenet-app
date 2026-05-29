@@ -16,14 +16,14 @@ const createposts = () => {
   const [value, setValue] = useState(null)
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
-  const API_URL = Constants.expoConfig?.extra?.API_URL;
+  const API_URL = process.env.EXPO_PUBLIC_API_URL
   const router = useRouter();
   
   const handlePost = async () => {
     if(!postText.trim()) return;
     try {
       setLoading(true)
-      const response = await axios.post(API_URL, {
+      const response = await axios.post(`${API_URL}/signals/`, {
         signal_text: postText
       });
       console.log("Posted", response.data)
