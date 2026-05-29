@@ -4,11 +4,35 @@ import React from 'react'
 import { StatusBar } from "expo-status-bar";
 import { Ionicons, FontAwesome, AntDesign  } from "@expo/vector-icons";
 import { useRouter } from 'expo-router';
-import Config from 'react-native-config';
+import { useState } from 'react';
+import axios from 'axios';
+
 
 
 const signup = () => {
    const router = useRouter()
+   const [email, setEmail] = useState("");
+   const [loading, setLoading] = useState(false)
+   const [password, setPassword] = useState("")
+   const API_URL = process.env.EXPO_PUBLIC_API_URL
+   const handleSignup = async () => {
+      if (!email || !password) return;
+      try {
+         setLoading(true)
+         const response = await axios.post(
+            `${API_URL}/signals/register`,
+            {
+            email,
+            password,
+            }
+         );
+         console.log("Sign Up Message:", response.data)
+      } catch (error: any) {
+         console.log("Sign error:", error.response?.data || error.message)
+      } finally {
+         setLoading(false)
+      }
+   };
   return (
     <SafeAreaView className='flex-1 bg-black'>
       <StatusBar style='light' />
@@ -36,6 +60,8 @@ const signup = () => {
          placeholder="Email"
          placeholderTextColor="#888"
          className="flex-1 text-white p-4 rounded-xl "
+         value={email}
+         onChangeText={setEmail}
          />
       </View>
       
@@ -46,13 +72,17 @@ const signup = () => {
          placeholderTextColor="#888"
          secureTextEntry
          className="flex-1 text-white p-4 rounded-xl "
+         value={password}
+         onChangeText={setPassword}
          />
       </View>
       
 
-      <TouchableOpacity className="bg-white p-4 rounded-xl mt-2">
+      <TouchableOpacity className="bg-white p-4 rounded-xl mt-2"
+      disabled={loading}
+      onPress={handleSignup}>
         <Text className="text-center font-bold">
-          Sign Up
+          {loading ? "Creating account..." : "Sign Up"}
         </Text>
       </TouchableOpacity>
       <View className="flex-row items-center my-6">
