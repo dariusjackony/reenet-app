@@ -35,11 +35,13 @@ const Posts = () => {
   const isDark = colorScheme === "dark";
   const router = useRouter();
   const [data, setData] = useState<Post[]>([]);
-  const API_URL = Constants.expoConfig?.extra?.API_URL;
+  const API_URL = process.env.EXPO_PUBLIC_API_URL
+  const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
+  const [comment, setComment] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(`${API_URL}/signals/`);
         setData(response.data);
         console.log("API RESPONSE:", response.data);
       } catch (error) {
@@ -77,7 +79,10 @@ const Posts = () => {
             {item.likes}
           </Text>
         </Pressable>
-        <Pressable className="flex-row items-center gap-2">
+        <Pressable 
+         className="flex-row items-center gap-2"
+         onPress={() => setActiveCommentId(activeCommentId === item.id ? null : item.id)}
+         >
           <MessageCircle size={20} color="#9ca3af" />
           <Text className="text-zinc-400">
             3
@@ -90,6 +95,22 @@ const Posts = () => {
           <Share2 size={20} color="#9ca3af" />
         </Pressable>
       </View>
+      {activeCommentId === item.id && (
+        <View>
+          <TextInput
+            placeholder="Write a comment..."
+            placeholderTextColor="#9ca3af"
+            value={comment}
+            onChangeText={setComment}
+            className="bg-zinc-900 text-white p-3 rounded-lg"
+          />
+          <Pressable>
+            <Text>
+              Post
+            </Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
   return (
