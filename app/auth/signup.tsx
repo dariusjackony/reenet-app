@@ -15,17 +15,19 @@ const signup = () => {
    const [loading, setLoading] = useState(false)
    const [password, setPassword] = useState("")
    const API_URL = process.env.EXPO_PUBLIC_API_URL
+   
    const handleSignup = async () => {
       if (!email || !password) return;
       try {
          setLoading(true)
          const response = await axios.post(
-            `${API_URL}/signals/register`,
+            `${API_URL}/signals/register/`,
             {
             email,
             password,
             }
          );
+         router.push("/posts")
          console.log("Sign Up Message:", response.data)
       } catch (error: any) {
          console.log("Sign error:", error.response?.data || error.message)

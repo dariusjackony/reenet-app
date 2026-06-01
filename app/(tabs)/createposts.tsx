@@ -26,6 +26,7 @@ const createposts = () => {
       const response = await axios.post(`${API_URL}/signals/`, {
         signal_text: postText
       });
+      router.push("/posts")
       console.log("Posted", response.data)
       Alert.alert("Success", "Posted Successfully")
       setPostText("")
