@@ -43,7 +43,7 @@ const Posts = () => {
       try {
         const response = await axios.get(`${API_URL}/signals/`);
         setData(response.data);
-        console.log("API RESPONSE:", response.data);
+        
       } catch (error) {
         console.log("Error:", error);
       }

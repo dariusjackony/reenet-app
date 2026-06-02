@@ -6,7 +6,7 @@ import { Ionicons, FontAwesome, AntDesign  } from "@expo/vector-icons";
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import axios from 'axios';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const signup = () => {
@@ -27,6 +27,10 @@ const signup = () => {
             password,
             }
          );
+        
+         const user = response.data.user;
+         await AsyncStorage.setItem("user", JSON.stringify(user));
+         console.log("Saved User:", user)
          router.push("/posts")
          console.log("Sign Up Message:", response.data)
       } catch (error: any) {
