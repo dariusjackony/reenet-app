@@ -27,10 +27,9 @@ const signup = () => {
             password,
             }
          );
-        
-         const user = response.data.user;
-         await AsyncStorage.setItem("user", JSON.stringify(user));
-         console.log("Saved User:", user)
+         const User = response.data 
+         console.log(User)
+      
          router.push("/posts")
          console.log("Sign Up Message:", response.data)
       } catch (error: any) {
