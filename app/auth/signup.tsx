@@ -27,9 +27,8 @@ const signup = () => {
             password,
             }
          );
-         const User = response.data 
-         console.log(User)
-      
+         await AsyncStorage.setItem("access", response.data.access);
+         await AsyncStorage.setItem("refresh", response.data.refresh_token);
          router.push("/posts")
          console.log("Sign Up Message:", response.data)
       } catch (error: any) {

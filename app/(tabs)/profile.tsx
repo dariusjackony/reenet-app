@@ -1,9 +1,20 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { Ionicons } from '@expo/vector-icons'
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const profile = () => {
+  const [user, setUser] = useState(null);
+  useState(() => {
+    const getProfile = async  () =>{
+      try {
+        
+      }
+    }
+
+  },[])
   return (
     <SafeAreaView className='flex-1 bg-black'>
       <StatusBar style='light' />
