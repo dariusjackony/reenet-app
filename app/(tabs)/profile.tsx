@@ -7,14 +7,28 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 const profile = () => {
   const [user, setUser] = useState(null);
-  useState(() => {
+  const API_URL = process.env.EXPO_PUBLIC_API_URL
+
+  useEffect(() => {
     const getProfile = async  () =>{
       try {
-        
+        const token = await AsyncStorage.getItem("access");
+        const response = await axios.get(
+          `${API_URL}/signals/my_profile`,
+          {
+            headers: {
+              Authorization:`Bearer ${token}`
+            },
+          }
+        );
+        console.log("MY PROFILE", response.data)
+      } catch(error:any){
+        console.log("Profilee error:", error.response?.data || error.message)
       }
-    }
+    };
+   getProfile();
+  }, []);
 
-  },[])
   return (
     <SafeAreaView className='flex-1 bg-black'>
       <StatusBar style='light' />
@@ -76,4 +90,5 @@ const profile = () => {
   )
 }
 
-export default profile
+
+export default profile;
