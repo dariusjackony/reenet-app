@@ -11,13 +11,14 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from 'react';
-import {Plus} from  "lucide-react-native";
 import { useRouter } from 'expo-router';
 import {
   Heart,
   MessageCircle,
   Bookmark,
-  Share2
+  Share2,
+  Ellipsis,
+  Plus, BarChart2
 } from "lucide-react-native";
 import axios from 'axios';
 import Constants from "expo-constants";
@@ -53,25 +54,35 @@ const Posts = () => {
   const renderPost = ({ item }: {item: Post}) => (
     <View className="p-4 border-b border-zinc-800">
 
-      <View className="flex-row items-center mb-3">
-        <Image
-          source={require("../../assets/images/pfp.jpeg")}
-          className="w-10 h-10 rounded-full mr-3"
-        />
-        <Text className="text-white text-lg font-bold">
-          Darius
-        </Text>
+      <View className="flex-row items-center justify-between mb-3">
+        <View className='flex-row items-center'>
+           <Image
+            source={require("../../assets/images/pfp.jpeg")}
+            className="w-10 h-10 rounded-full mr-3"
+            />
+          <View>
+            <Text className="text-white text-[18px] font-semibold">
+              Ssematimba Genesis
+            </Text>
+            <Text className="text-gray-400 text-xs">
+              2h ago
+            </Text>
+          </View>
+        </View>
+         <Pressable>
+            <Ellipsis size={20} color="#9ca3af" />
+         </Pressable>
       </View>
-      <Text className="text-white text-base mb-4 ml-10">
+      <Text className="text-gray-100 text-base mt-1 ml-1">
         {item.signal_text}
       </Text>
-      <View className="flex-row justify-around">
+      <View className="flex-row mt-8 justify-start gap-20">
         <Pressable
           onPress={() => console.log('Liked')}
           className="flex-row items-center gap-2"
         >
           <Heart
-            size={20}
+            size={16}
             color= "#9ca3af"
             fill= "none"
           />
@@ -83,16 +94,16 @@ const Posts = () => {
          className="flex-row items-center gap-2"
          onPress={() => setActiveCommentId(activeCommentId === item.id ? null : item.id)}
          >
-          <MessageCircle size={20} color="#9ca3af" />
+          <MessageCircle size={16} color="#9ca3af" />
           <Text className="text-zinc-400">
             3
           </Text>
         </Pressable>
         <Pressable>
-          <Bookmark size={20} color="#9ca3af" />
+          <Bookmark size={16} color="#9ca3af" />
         </Pressable>
-        <Pressable>
-          <Share2 size={20} color="#9ca3af" />
+        <Pressable className='flex-row gap-1'>
+          <BarChart2 size={16} color="#9ca3af" /><Text className='text-gray-400'>1.2K</Text>
         </Pressable>
       </View>
       {activeCommentId === item.id && (

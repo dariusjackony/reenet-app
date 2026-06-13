@@ -112,13 +112,14 @@ const createposts = () => {
 
             </View>
           </View>
-            <View className='px-2 py-8 pt-10'>
+            <View className='py-8 pt-5'>
               <TextInput
                 value={postText}
                 onChangeText={setPostText}
                 placeholder="What's on your mind?"
                 placeholderTextColor="#888"
                 className='text-white p-5 rounded-xl '
+                multiline
               />
             </View>
     </View>
