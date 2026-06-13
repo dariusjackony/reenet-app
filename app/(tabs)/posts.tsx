@@ -39,6 +39,7 @@ const Posts = () => {
   const API_URL = process.env.EXPO_PUBLIC_API_URL
   const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
   const [comment, setComment] = useState("");
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -140,6 +141,8 @@ const Posts = () => {
         data={data}
         renderItem={renderPost}
         keyExtractor={(item) => item.id.toString()}
+        style={{ flex: 1 }}
+        
       />
       <Pressable
       onPress={()=> router.push("/createposts")}
@@ -152,5 +155,3 @@ const Posts = () => {
 };
 
 export default Posts;
-
-const styles = StyleSheet.create({});

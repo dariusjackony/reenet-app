@@ -10,6 +10,7 @@ import { X } from "lucide-react-native";
 import { useRouter } from 'expo-router';
 import { ActivityIndicator } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { Film,MapPin, ListChecks,ImagePlus, Users  } from "lucide-react-native";
 const createposts = () => {
   const [postText, setPostText] = useState("")
   const [loading, setLoading] = useState(false)
@@ -37,7 +38,7 @@ const createposts = () => {
     }
   }
   const data = [
-    {label: "Public", value: "Public"},
+    {label: "Private", value: "Private"},
     {label: "Everyone", value:"Everyone"}
   ]
   return (
@@ -70,9 +71,7 @@ const createposts = () => {
               className="w-12 h-12 rounded-full"
             />
             <View className="flex-1 ml-3">
-              <Text className="text-white font-semibold">
-                Darius Jackony
-              </Text>
+             
               <View className="mt-2">
 
                 <Dropdown
@@ -83,7 +82,7 @@ const createposts = () => {
                   placeholder="Who can see this?"
                   onChange={(item) => setValue(item.value)}
                   style={{
-                    height: 40,
+                    height: 27,
                     width: 150,
                     borderWidth: 1,
                     borderColor: "#333",
@@ -120,7 +119,16 @@ const createposts = () => {
                 placeholderTextColor="#888"
                 className='text-white p-5 rounded-xl '
                 multiline
+                autoFocus
               />
+            </View>
+            <View className="h-[1px] bg-zinc-800 w-full my-3" />
+            <View className='flex-row gap-6 px-4'>
+              <ImagePlus size={20} color="#9ca3af"/>
+              <MapPin size={20} color="#9ca3af"/>
+              <ListChecks size={20} color="#9ca3af"/>
+              <Film size={20} color="#9ca3af"/>
+              <Text className='text-gray-300 ml-5'><Users size={16} color="#9ca3af"/>  Everyone can reply</Text>
             </View>
     </View>
     </SafeAreaView>
