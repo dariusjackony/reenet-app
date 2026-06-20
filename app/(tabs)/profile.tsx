@@ -5,8 +5,15 @@ import { StatusBar } from 'expo-status-bar'
 import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  time_stamp: string;
+}
 const profile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null)
   const API_URL = process.env.EXPO_PUBLIC_API_URL
 
   useEffect(() => {
@@ -21,6 +28,8 @@ const profile = () => {
             },
           }
         );
+        console.log("TOKEN:", token);
+        setUser(response.data)
         console.log("MY PROFILE", response.data)
       } catch(error:any){
         console.log("Profilee error:", error.response?.data || error.message)
@@ -44,22 +53,22 @@ const profile = () => {
 
           <View className="flex-row flex-1 justify-around ml-6">
             <View className="items-center">
-              <Text className="text-white text-2xl font-bold text-base">48</Text>
+              <Text className="text-white text-2xl font-bold text-xl">48</Text>
               <Text className="text-gray-400 text-base">Posts</Text>
             </View>
             <View className="items-center">
-              <Text className="text-white text-2xl font-bold text-base">100</Text>
+              <Text className="text-white text-2xl font-bold text-xl">100</Text>
               <Text className="text-gray-400 text-base">Followers</Text>
             </View>
             <View className="items-center">
-              <Text className="text-white  text-2xl font-bold text-base">120K</Text>
+              <Text className="text-white  text-2xl font-bold text-xl">120K</Text>
               <Text className="text-gray-400 text-base">Following</Text>
             </View>
           </View>
 
         </View>
 
-        <Text className="text-white text-2xl font-semibold mt-3">Darius Jackony</Text>
+        <Text className="text-white text-2xl font-semibold mt-3">{user?.username}</Text>
         <Text className="text-gray-300 text-base mt-0.5 leading-5">
           I'm a hustler trusting and having a strong faith in God.
         </Text>
@@ -70,7 +79,11 @@ const profile = () => {
           </View>
           <View className='mt-2 flex-row gap-2'>
             <Ionicons name='calendar-outline'  size={16} color="white" />
-            <Text className='text-gray-400'>Joined December 2021 </Text>
+            <Text className='text-gray-400'>Joined {new Date(user?.time_stamp || "").toLocaleDateString("en-us", {
+              month: "long",
+              year: "numeric"
+            })} 
+            </Text>
           </View>
         </View>
         <View className="flex-row gap-2 mt-5">

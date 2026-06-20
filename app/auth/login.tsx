@@ -24,6 +24,7 @@ const login = () => {
             password,
           }
        )
+       router.push("/posts")
        console.log("Conole message:", response.data)
     } catch (error:any) {
       console.log("Error message:", error.response?.data || error.message)
